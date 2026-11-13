@@ -1,0 +1,13 @@
+# Build de Maven
+target/
+
+# Bitácora generada en tiempo de ejecución
+bitacora.txt
+
+# Clases sueltas
+*.class
+
+# Entornos de desarrollo
+.idea/
+*.iml
+.vscode/
