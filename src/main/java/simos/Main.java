@@ -7,6 +7,7 @@ import simos.seguridad.GestorUsuarios;
 import simos.seguridad.ModuloSeguridad;
 import simos.seguridad.Permiso;
 import simos.seguridad.Usuario;
+import simos.concurrencia.ModuloConcurrencia;
 
 /**
  * Punto de entrada: login, menú principal y control de permisos por rol.
@@ -109,7 +110,7 @@ public final class Main {
                         () -> moduloPendiente("Planificación de CPU"));
                 case "2" -> abrirModulo(usuario, Permiso.CONCURRENCIA,
                         "MÓDULO 2 - CONCURRENCIA",
-                        () -> moduloPendiente("Concurrencia"));
+                        () -> ModuloConcurrencia.ejecutar(sc));
                 case "3" -> abrirModulo(usuario, Permiso.MEMORIA,
                         "MÓDULO 3 - MEMORIA",
                         () -> moduloPendiente("Memoria"));
