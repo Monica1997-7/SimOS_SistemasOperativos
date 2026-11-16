@@ -21,6 +21,10 @@ public class BufferCompartido {
             throws InterruptedException {
 
         // Espera hasta que exista un espacio libre
+        if (espaciosDisponibles.availablePermits() == 0) {
+            System.out.println("\n[ESPERA] " + nombreProductor
+                    + ": buffer lleno, esperando espacio disponible...");
+        }
         espaciosDisponibles.acquire();
 
         // Solicita acceso exclusivo al buffer
@@ -32,6 +36,7 @@ public class BufferCompartido {
         System.out.println("\n[" + nombreProductor.toUpperCase() + "]");
         System.out.println("  Elemento producido : " + elemento);
         System.out.println("  Elementos en buffer: " + buffer.size());
+        System.out.println("  Contenido del buffer: " + buffer);
         System.out.println("----------------------------------------");
 
         // Libera el acceso al buffer
@@ -46,6 +51,10 @@ public class BufferCompartido {
             throws InterruptedException {
 
         // Espera hasta que exista un elemento
+        if (elementosDisponibles.availablePermits() == 0) {
+            System.out.println("\n[ESPERA] " + nombreConsumidor
+                    + ": buffer vacio, esperando elementos...");
+        }
         elementosDisponibles.acquire();
 
         // Solicita acceso exclusivo al buffer
@@ -57,6 +66,7 @@ public class BufferCompartido {
         System.out.println("\n[" + nombreConsumidor.toUpperCase() + "]");
         System.out.println("  Elemento consumido : " + elemento);
         System.out.println("  Elementos en buffer: " + buffer.size());
+        System.out.println("  Contenido del buffer: " + buffer);
         System.out.println("----------------------------------------");
 
         // Libera el acceso al buffer

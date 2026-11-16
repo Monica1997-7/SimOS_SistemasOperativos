@@ -29,15 +29,15 @@ public class ModuloConcurrencia {
             switch (opcion) {
 
                 case 1:
-                    ContadorCompartido.ejecutarSinSincronizacion();
+                    ejecutarContador(scanner, false);
                     break;
 
                 case 2:
-                    ContadorCompartido.ejecutarConSincronizacion();
+                    ejecutarContador(scanner, true);
                     break;
 
                 case 3:
-                    ejecutarProductorConsumidor();
+                    ejecutarProductorConsumidor(scanner);
                     break;
 
                 case 4:
@@ -52,17 +52,39 @@ public class ModuloConcurrencia {
     }
 
     // Ejecutar simulacion productor-consumidor
-    public static void ejecutarProductorConsumidor() {
+    public static void ejecutarProductorConsumidor(Scanner scanner) {
 
-        System.out.println("\n--- PRODUCTOR - CONSUMIDOR ---");
+        System.out.println("\n========================================");
+        System.out.println("      SIMULACION PRODUCTOR-CONSUMIDOR");
+        System.out.println("========================================");
+
+        System.out.print("Cantidad de elementos a procesar: ");
+
+        int cantidad;
+
+        try {
+            cantidad = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: debe ingresar un numero entero.");
+            return;
+        }
+
+        if (cantidad <= 0) {
+            System.out.println("Error: la cantidad debe ser mayor que cero.");
+            return;
+        }
+
+        System.out.println("\nCapacidad del buffer: 5");
+        System.out.println("Elementos a procesar: " + cantidad);
+        System.out.println("----------------------------------------");
 
         BufferCompartido buffer = new BufferCompartido();
 
         Productor productor = new Productor(
-                buffer, 20, "Productor 1");
+                buffer, cantidad, "Productor 1");
 
         Consumidor consumidor = new Consumidor(
-                buffer, 20, "Consumidor 1");
+                buffer, cantidad, "Consumidor 1");
 
         productor.start();
         consumidor.start();
@@ -77,7 +99,54 @@ public class ModuloConcurrencia {
             return;
         }
 
-        System.out.println("\nSimulacion finalizada.");
-        System.out.println("Se procesaron los 20 elementos.");
+        System.out.println("\n========================================");
+        System.out.println("          SIMULACION FINALIZADA");
+        System.out.println("========================================");
+        System.out.println("Elementos procesados: " + cantidad);
+    }
+
+    public static void ejecutarContador(Scanner scanner, boolean sincronizado) {
+
+        System.out.println("\n========================================");
+        System.out.println("       CONFIGURACION DEL CONTADOR");
+        System.out.println("========================================");
+
+        System.out.print("Cantidad de hilos: ");
+        int cantidadHilos;
+
+        try {
+            cantidadHilos = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: ingrese un numero entero.");
+            return;
+        }
+
+        System.out.print("Incrementos por hilo: ");
+        int incrementosPorHilo;
+
+        try {
+            incrementosPorHilo = Integer.parseInt(scanner.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: ingrese un numero entero.");
+            return;
+        }
+
+        if (cantidadHilos <= 0 || incrementosPorHilo <= 0) {
+            System.out.println("Error: ambos valores deben ser mayores que cero.");
+            return;
+        }
+
+        if ((long) cantidadHilos * incrementosPorHilo > Integer.MAX_VALUE) {
+            System.out.println("Error: la cantidad total de incrementos es demasiado grande.");
+            return;
+        }
+
+        if (sincronizado) {
+            ContadorCompartido.ejecutarConSincronizacion(
+                    cantidadHilos, incrementosPorHilo);
+        } else {
+            ContadorCompartido.ejecutarSinSincronizacion(
+                    cantidadHilos, incrementosPorHilo);
+        }
     }
 }

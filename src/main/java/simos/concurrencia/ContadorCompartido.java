@@ -11,16 +11,16 @@ public class ContadorCompartido {
     }
 
     // Ejecutar contador sin sincronizacion
-    public static void ejecutarSinSincronizacion() {
+    public static void ejecutarSinSincronizacion(int cantidadHilos, int incrementosPorHilo) {
 
         contador = 0;
-        Thread[] hilos = new Thread[10];
+        Thread[] hilos = new Thread[cantidadHilos];
 
         System.out.println("\n--- CONTADOR SIN SINCRONIZACION ---");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < cantidadHilos; i++) {
             hilos[i] = new Thread(() -> {
-                for (int j = 0; j < 1000; j++) {
+                for (int j = 0; j < incrementosPorHilo; j++) {
                     contador++;
                 }
             });
@@ -30,21 +30,31 @@ public class ContadorCompartido {
 
         esperarHilos(hilos);
 
-        System.out.println("Resultado obtenido: " + contador);
-        System.out.println("Resultado esperado: 10000");
+        int esperado = cantidadHilos * incrementosPorHilo;
+        int perdidos = esperado - contador;
+
+        System.out.println("\n========================================");
+        System.out.println("      RESULTADOS SIN SINCRONIZACION");
+        System.out.println("========================================");
+        System.out.println("Hilos ejecutados       : " + cantidadHilos);
+        System.out.println("Incrementos por hilo   : " + incrementosPorHilo);
+        System.out.println("Resultado esperado     : " + esperado);
+        System.out.println("Resultado obtenido     : " + contador);
+        System.out.println("Incrementos perdidos   : " + perdidos);
+        System.out.println("========================================");
     }
 
     // Ejecutar contador con sincronizacion
-    public static void ejecutarConSincronizacion() {
+    public static void ejecutarConSincronizacion(int cantidadHilos, int incrementosPorHilo) {
 
         contador = 0;
-        Thread[] hilos = new Thread[10];
+        Thread[] hilos = new Thread[cantidadHilos];
 
         System.out.println("\n--- CONTADOR CON SINCRONIZACION ---");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < cantidadHilos; i++) {
             hilos[i] = new Thread(() -> {
-                for (int j = 0; j < 1000; j++) {
+                for (int j = 0; j < incrementosPorHilo; j++) {
                     incrementarSeguro();
                 }
             });
@@ -54,8 +64,18 @@ public class ContadorCompartido {
 
         esperarHilos(hilos);
 
-        System.out.println("Resultado obtenido: " + contador);
-        System.out.println("Resultado esperado: 10000");
+        int esperado = cantidadHilos * incrementosPorHilo;
+        int perdidos = esperado - contador;
+
+        System.out.println("\n========================================");
+        System.out.println("      RESULTADOS CON SINCRONIZACION");
+        System.out.println("========================================");
+        System.out.println("Hilos ejecutados       : " + cantidadHilos);
+        System.out.println("Incrementos por hilo   : " + incrementosPorHilo);
+        System.out.println("Resultado esperado     : " + esperado);
+        System.out.println("Resultado obtenido     : " + contador);
+        System.out.println("Incrementos perdidos   : " + perdidos);
+        System.out.println("========================================");
     }
 
     // Esperar a que todos los hilos terminen
