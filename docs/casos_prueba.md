@@ -70,13 +70,23 @@ fecha/hora;usuario;acción;resultado
 2026-11-13 16:45:02;admin;LOGIN;PERMITIDO
 ```
 
+## Casos de la fase actual (CPU)
+
+### C1 — Comparación FCFS vs Round Robin
+
+- Entrada: sesión con `admin`, opción `1`, opción `2` (leer `procesos.txt`), quantum `3`.
+- Datos: P1(0,8), P2(1,4), P3(2,9), P4(3,5), P5(6,2).
+- Esperas FCFS: P1=0, P2=7, P3=10, P4=18, P5=20 → promedio **11.00**.
+- Esperas RR: P1=17, P2=13, P3=17, P4=15, P5=9 → promedio **14.20**.
+- Gantt RR: `| P1 | P2 | P3 | P4 | P1 | P5 | P2 | P3 | P4 | P1 | P3 |`.
+- Conclusión esperada: FCFS tiene el menor promedio de espera.
+- También se puede ingresar la misma lista por teclado (opción `1` del módulo).
+
 ## Casos previstos para fases posteriores
 
 Estos datos quedan registrados aquí para cuando se implementen los módulos; todavía no
 tienen resultados calculados.
 
-- **CPU:** P1(0,8), P2(1,4), P3(2,9), P4(3,5), P5(6,2), quantum = 3. Comparar FCFS y
-  Round Robin; el promedio de espera de RR debe coincidir con el cálculo a mano.
 - **Memoria:** cadena de 20 referencias con 3 marcos; comparar FIFO y LRU.
 - **Disco:** cabezal inicial 70, cola `{130, 25, 160, 45, 90, 10, 185, 75}`, rango 0–199;
   comparar FCFS, SSTF y SCAN.

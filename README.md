@@ -21,8 +21,10 @@ java -jar target/simos.jar
 ## Estado actual
 
 Fase 1 completada: base del proyecto, login, roles, permisos, bitácora y módulo de
-Seguridad. Los módulos de CPU, concurrencia, memoria y almacenamiento se habilitarán en
-fases posteriores (por ahora muestran un aviso).
+Seguridad. Fase 2 en curso: Módulo 1 (Planificación de CPU) con FCFS y Round Robin,
+entrada por teclado o desde `src/main/resources/procesos.txt` (formato
+`nombre;llegada;rafaga`). Los módulos de concurrencia, memoria y almacenamiento se
+habilitarán en fases posteriores (por ahora muestran un aviso).
 
 ## Usuarios iniciales
 
