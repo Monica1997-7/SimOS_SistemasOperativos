@@ -2,17 +2,7 @@
 
 ## Ejecución
 
-```bash
-mvn -q compile
-mvn -q exec:java -Dexec.mainClass=simos.Main
-```
-
-También se puede empaquetar y ejecutar el jar:
-
-```bash
-mvn -q package
-java -jar target/simos.jar
-```
+Ejecuta el archivo Main.java desde VS Code
 
 ## Usuarios iniciales
 

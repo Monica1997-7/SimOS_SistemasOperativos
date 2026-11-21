@@ -9,22 +9,25 @@ Sistemas; toda la interfaz es de consola y solo se usa el JDK estándar.
 - JDK 17 o superior.
 - Maven 3.8 o superior.
 
-## Comandos
 
-```bash
-mvn -q compile
-mvn -q exec:java -Dexec.mainClass=simos.Main
-mvn -q package
-java -jar target/simos.jar
-```
 
-## Estado actual
+## Módulos implementados
 
-Fase 1 completada: base del proyecto, login, roles, permisos, bitácora y módulo de
-Seguridad. Fase 2 en curso: Módulo 1 (Planificación de CPU) con FCFS y Round Robin,
-entrada por teclado o desde `src/main/resources/procesos.txt` (formato
-`nombre;llegada;rafaga`). Los módulos de concurrencia, memoria y almacenamiento se
-habilitarán en fases posteriores (por ahora muestran un aviso).
+El simulador cuenta actualmente con los siguientes módulos funcionales:
+
+ **Módulo 5: Seguridad y Protección (Base)**
+  - Inicio de sesión con contraseñas encriptadas mediante hash SHA-256.
+  - Control de acceso por roles (Administrador y Usuario).
+  - Bitácora de auditoría que registra fecha, hora, usuario, acción y si fue permitida o denegada.
+
+**Módulo 1: Planificación de CPU**
+  - Simulación de algoritmos FCFS y Round Robin (con quantum configurable).
+  - Cálculo de tiempos de retorno y espera, promedios y generación del diagrama de Gantt en consola.
+  - Comparativa automática para indicar cuál algoritmo fue más eficiente.
+
+**Módulo 2: Concurrencia y Sincronización**
+  - Simulación de condición de carrera (10 hilos incrementando un contador) y su solución usando mutex (`synchronized`).
+  - Implementación del problema Productor-Consumidor con un buffer de tamaño fijo (5 posiciones), utilizando semáforos para controlar los espacios vacíos y llenos.
 
 ## Usuarios iniciales
 
