@@ -49,3 +49,15 @@ fecha/hora;usuario;acción;resultado
 ```
 
 Los casos de prueba manuales están en [`docs/casos_prueba.md`](docs/casos_prueba.md).
+
+## Equipo y Distribución de los módulos
+
+
+
+| Integrante | Módulo(s) a cargo |
+| :--- | :--- |
+| Mónica Ortiz| Módulo 1: Planificación de CPU <br>Módulo 5: Seguridad y Protección|
+|Cristian Bermeo | Módulo 2: Concurrencia y Sincronización |
+|Jhovanny Rodríguez | Modulo 3: Paginación |
+| Juan Esteban Aguilar | Modulo 4: Almacenamiento |
+
