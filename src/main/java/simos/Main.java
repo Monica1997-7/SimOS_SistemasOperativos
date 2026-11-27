@@ -4,6 +4,7 @@ package simos; // Define que esta clase pertenece al paquete principal del simul
 // Aquí se le dice a Java qué herramientas externas va a necesitar esta clase para funcionar.
 import java.util.Optional; // Herramienta para manejar valores que pueden existir o estar vacíos (evita errores de "null").
 import java.util.Scanner; // Herramienta para leer lo que el usuario escribe por teclado.
+import simos.almacenamiento.ModuloAlmacenamiento; // Trae el menú de planificación de disco (Módulo 4).
 // --- CONEXIÓN CON EL MÓDULO 1 (AGREGADO EN ESTA FASE) ---
 // ModuloCPU contiene el menú de planificación de CPU. Al importarlo, el Main puede
 // crear un objeto de ese módulo cuando el usuario elige la opción 1 del menú principal.
@@ -230,7 +231,7 @@ public final class Main {
                         () -> moduloPendiente("Memoria"));
                 case "4" -> abrirModulo(usuario, Permiso.ALMACENAMIENTO,
                         "MÓDULO 4 - ALMACENAMIENTO",
-                        () -> moduloPendiente("Almacenamiento"));
+                        () -> ModuloAlmacenamiento.ejecutar(sc));
                 case "5" -> abrirModulo(usuario, Permiso.SEGURIDAD,
                         "MÓDULO 5 - SEGURIDAD",
                         // Aquí sí entra al Módulo 5 real llamando a su clase.
